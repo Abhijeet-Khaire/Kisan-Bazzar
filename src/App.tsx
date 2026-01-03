@@ -29,7 +29,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/Kisan-Bazzar/">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/buyer/marketplace" element={<BuyerMarketplace />} />
