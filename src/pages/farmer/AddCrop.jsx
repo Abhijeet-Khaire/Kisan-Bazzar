@@ -12,11 +12,13 @@ import { Leaf, Upload } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useGlobalState } from "@/context/GlobalState";
 // import { Crop } from "@/lib/mockData";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AddCrop() {
     const navigate = useNavigate();
     const { toast } = useToast();
     const { addCrop } = useGlobalState();
+    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
 
     // Form state
@@ -43,7 +45,7 @@ export default function AddCrop() {
                 harvestDate: new Date().toISOString(),
                 location: "Karnal", // Mock location
                 state: "Haryana", // Mock state
-                farmerName: "Rajesh Kumar", // Mock current user
+                farmerName: user?.name || "Farmer",
                 imageUrl: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400", // Placeholder
                 auctionEndsAt: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days from now
             });

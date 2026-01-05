@@ -29,9 +29,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
 export default function FarmerDashboard() {
   const [activeTab, setActiveTab] = useState("active");
+  const { user } = useAuth();
   const { crops, bids, farmerStats, extendAuction, cancelListing, confirmPayment } = useGlobalState();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -51,7 +53,7 @@ export default function FarmerDashboard() {
               <Leaf className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="font-serif text-2xl font-bold text-foreground">Welcome back, Rajesh</h1>
+              <h1 className="font-serif text-2xl font-bold text-foreground">Welcome back, {user?.name || 'Farmer'}</h1>
               <p className="text-muted-foreground">Manage your crop listings and track bids</p>
             </div>
           </div>
