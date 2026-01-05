@@ -7,12 +7,15 @@ import { formatDistanceToNow } from "date-fns";
 
 
 
-export function CropCard({ crop, onBid, showBidButton = true }) {
+export function CropCard({ crop, onBid, onClick, showBidButton = true }) {
   const timeLeft = formatDistanceToNow(new Date(crop.auctionEndsAt), { addSuffix: false });
   const priceIncrease = ((crop.currentBid - crop.floorPrice) / crop.floorPrice * 100).toFixed(1);
 
   return (
-    <Card className="group overflow-hidden border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+    <Card
+      onClick={() => onClick?.(crop)}
+      className="group overflow-hidden border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300 cursor-pointer"
+    >
       <CardHeader className="p-0">
         <div className="relative h-48 overflow-hidden">
           <img
@@ -83,7 +86,10 @@ export function CropCard({ crop, onBid, showBidButton = true }) {
           <Button
             className="w-full"
             variant="bid"
-            onClick={() => onBid?.(crop)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onBid?.(crop);
+            }}
           >
             <Gavel className="h-4 w-4" />
             Place Bid

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useGlobalState } from "@/context/GlobalState";
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,7 @@ export default function CropDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
     const { crops, bids, acceptBid } = useGlobalState();
+    const { user } = useAuth();
 
     const crop = crops.find(c => c.id === id);
     const cropBids = bids.filter(b => b.cropId === id);
@@ -96,7 +98,7 @@ export default function CropDetails() {
                                                         ₹{bid.amount.toLocaleString()}
                                                     </div>
                                                     {bid.status === "active" && <Badge className="mt-1">Highest Bid</Badge>}
-                                                    {bid.status === "active" && crop.status === "live" && (
+                                                    {user?.role === 'farmer' && bid.status === "active" && crop.status === "live" && (
                                                         <Button
                                                             size="sm"
                                                             className="ml-4"

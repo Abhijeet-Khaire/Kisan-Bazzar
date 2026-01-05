@@ -130,7 +130,8 @@ export default function FarmerDashboard() {
                     {myListings.filter(c => c.status === "live").map((crop) => (
                       <div
                         key={crop.id}
-                        className="flex items-center gap-4 rounded-lg border border-border p-4 transition-colors hover:bg-accent/30"
+                        className="flex items-center gap-4 rounded-lg border border-border p-4 transition-colors hover:bg-accent/30 cursor-pointer"
+                        onClick={() => navigate(`/farmer/crop/${crop.id}`)}
                       >
                         <img
                           src={crop.imageUrl}
@@ -170,7 +171,7 @@ export default function FarmerDashboard() {
                         </div>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon">
+                            <Button variant="ghost" size="icon" onClick={(e) => e.stopPropagation()}>
                               <MoreVertical className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>

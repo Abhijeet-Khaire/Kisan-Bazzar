@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CropCard } from "@/components/crops/CropCard";
@@ -9,6 +10,7 @@ import { Gavel, TrendingUp } from "lucide-react";
 import { useGlobalState } from "@/context/GlobalState";
 
 export default function BuyerMarketplace() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Crops");
   const [selectedState, setSelectedState] = useState("All States");
@@ -81,7 +83,12 @@ export default function BuyerMarketplace() {
         {filteredCrops.length > 0 ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredCrops.map((crop) => (
-              <CropCard key={crop.id} crop={crop} onBid={handleBid} />
+              <CropCard
+                key={crop.id}
+                crop={crop}
+                onBid={handleBid}
+                onClick={(c) => navigate(`/buyer/crop/${c.id}`)}
+              />
             ))}
           </div>
         ) : (
