@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,12 @@ const Register = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { register } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (location.state?.role) {
+            setActiveRole(location.state.role);
+        }
+    }, [location.state]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

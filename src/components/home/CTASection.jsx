@@ -11,31 +11,31 @@ export function CTASection() {
             <Sparkles className="h-4 w-4" />
             Join 50,000+ Farmers Today
           </div>
-          
+
           <h2 className="font-serif text-3xl font-bold text-primary-foreground md:text-4xl lg:text-5xl">
             Ready to Get Fair Prices for Your Produce?
           </h2>
-          
+
           <p className="text-lg text-primary-foreground/80">
             Registration is free. Start listing your crops and connect with verified buyers across India.
             No middlemen, no hidden fees.
           </p>
-          
+
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link to="/register/farmer">
-              <Button 
-                size="xl" 
+            <Link to="/register" state={{ role: 'farmer' }}>
+              <Button
+                size="xl"
                 className="group bg-background text-foreground hover:bg-background/90"
               >
                 Register as Farmer
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link to="/register/buyer">
-              <Button 
-                size="xl" 
+            <Link to="/register" state={{ role: 'buyer' }}>
+              <Button
+                size="xl"
                 variant="outline"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="border-white text-white hover:bg-white hover:text-primary bg-transparent"
               >
                 Register as Buyer
               </Button>
