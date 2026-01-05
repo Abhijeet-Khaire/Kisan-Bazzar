@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useNavigate, Link, useLocation, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +17,9 @@ const roles = [
 ];
 
 const Register = () => {
-    const [activeRole, setActiveRole] = useState('farmer');
+    const [searchParams] = useSearchParams();
+    const roleParam = searchParams.get('role');
+    const [activeRole, setActiveRole] = useState(roleParam || 'farmer');
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -30,10 +32,11 @@ const Register = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (location.state?.role) {
-            setActiveRole(location.state.role);
+        const role = searchParams.get('role');
+        if (role && roles.some(r => r.id === role)) {
+            setActiveRole(role);
         }
-    }, [location.state]);
+    }, [searchParams]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

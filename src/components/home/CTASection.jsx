@@ -22,7 +22,7 @@ export function CTASection() {
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link to="/register" state={{ role: 'farmer' }}>
+            <Link to="/register?role=farmer">
               <Button
                 size="xl"
                 className="group bg-background text-foreground hover:bg-background/90"
@@ -31,7 +31,7 @@ export function CTASection() {
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link to="/register" state={{ role: 'buyer' }}>
+            <Link to="/register?role=buyer">
               <Button
                 size="xl"
                 variant="outline"
